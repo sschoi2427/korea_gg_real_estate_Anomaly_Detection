@@ -1,5 +1,6 @@
 
-path = "C:\\Users\\admin\\Desktop\\korea_gg_real_estate_Anomaly_Detection\\apart\\input"
+# path ="C:/Users/admin/Desktop/finalTest/apart/input"
+path = "C:/Users/sh01/Desktop/연구학점/프로젝트/finalTest/apart/input"
 
 path1 = paste(path, "/2016/아파트.csv", sep='')
 path2 = paste(path, "/2016/단독다가구.csv", sep='')
@@ -105,8 +106,8 @@ str(apt)
 # 데이터가 너무 방대하여 10000개만 비복원추출############
 set.seed(42)
 
-all <- apt[sample(nrow(apt), 5000), ]
-write.csv(apt, "C:/Users/admin/Desktop/korea_gg_real_estate_Anomaly_Detection/all.csv")
+# all <- apt[sample(nrow(apt), 5000), ]
+# write.csv(apt, "C:/Users/admin/Desktop/finalTest/all.csv")
 
 train <- apt[sample(nrow(apt), 4000) , ]
 test <- apt[sample(nrow(apt), 1000) , ]
@@ -116,15 +117,19 @@ str(train)
 str(test)
 
 
-saveRDS(all, file="C:/Users/admin/Desktop/korea_gg_real_estate_Anomaly_Detection/all.RDS")
-saveRDS(train,file="C:/Users/admin/Desktop/korea_gg_real_estate_Anomaly_Detection/train.RDS" )
-saveRDS(test,file="C:/Users/admin/Desktop/korea_gg_real_estate_Anomaly_Detection/test.RDS" )
+saveRDS(all, file="C:/Users/admin/Desktop/finalTest/all.RDS")
+saveRDS(train,file="C:/Users/admin/Desktop/finalTest/train.RDS" )
+saveRDS(test,file="C:/Users/admin/Desktop/finalTest/test.RDS" )
 
 #읽어오기#########################################################
 
+# path ="C:/Users/admin/Desktop/finalTest/"
+#all <-readRDS(file="C:/Users/admin/Desktop/finalTest/all.RDS")
+#train <-readRDS(file="C:/Users/admin/Desktop/finalTest/train.rds")
+#test <-readRDS(file="C:/Users/admin/Desktop/finalTest/test.RDS")
 
 
-path = "C:/Users/admin/Desktop/korea_gg_real_estate_Anomaly_Detection/"
+path = "C:/Users/sh01/Desktop/finalTest/"
 all <- readRDS(file=paste(path, "all.RDS", sep=''))
 train <- readRDS(file=paste(path, "train.RDS", sep=''))
 test <- readRDS(file=paste(path, "test.RDS", sep=''))
@@ -246,12 +251,12 @@ y_pred2 = predict(result.rf2, newdata=md_test)
 y_pred2[2]
 md_test$deposit[2]
 
-plot(y_pred2, true2)
 
 ############################################ 추가
 
 true2 <- md_test$deposit
 
+plot(y_pred2, true2)
 length(y_pred2)
 length(true2)
 
@@ -279,7 +284,7 @@ lines(y_pred2, d2[,4],lwd=2, col='red')
 
 head(d)
 conf2 <- (true > d2[,4] | true < d2[,3])
-cls2 <- ifelse(conf, 'abnormal', 'normal')
+cls2 <- ifelse(conf2, 'abnormal', 'normal')
 table(cls2)
 round(prop.table(table(cls2)), 4)*100
 
